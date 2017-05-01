@@ -21,8 +21,12 @@ nuget:
   disable_publish_on_pr: true
 
 build_script:
-- ps: .\build.ps1
-
+# - ps: .\build.ps1
+  - ps: |
+    cd .\Rx.NET\Source\src\System.Reactive\
+    msbuild /t:restore
+    dotnet sourcelink-git origin
+    
 test: off
 artifacts:
 - path: .\artifacts\*.nupkg
